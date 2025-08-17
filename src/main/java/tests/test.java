@@ -5,7 +5,7 @@ import main.java.model.Deck;
 import main.java.model.Suit;
 import main.java.model.Value;
 import main.java.model.UserHand;
-
+import main.java.model.DiscardPile;
 import java.util.Random;
 
 public class test {
@@ -32,14 +32,26 @@ public class test {
 
         deck.drawTop();
         deck.snapshot().size();
-        System.out.println("Deck Size after drawing top card: " + deck.snapshot().size());
+        System.out.println("Deck Size after drawing top card: " + deck.snapshot().size() + "\n");
 
         Deck newDeck = new Deck();
+        DiscardPile discardPile = new DiscardPile();
         System.out.println("\nNew Deck Size: " + newDeck.snapshot().size());
+ 
         UserHand userHand = new UserHand(3, newDeck);
-        System.out.println("New Deck Size after Player Draw: " + newDeck.snapshot().size());
+
+        System.out.println("New Deck Size after Player Draw (of 3): " + newDeck.snapshot().size());
         System.out.println("User Hand Card Count: " + userHand.getCardCount());
         System.out.println("User Hand Cards: " + userHand.getCards());
+
+        userHand.selectCardbyIndex(1);
+        userHand.selectCardbyIndex(5); // Invalid index test
+        
+        userHand.discardByIndex(discardPile, 0);
+        System.out.println("User Hand Cards after discard: " + userHand.getCards());
+        String testTitle = userHand.getCards().get(0).getCardTitle();
+        System.out.println("Discarding by title: " + testTitle);
+        userHand.discardByTitle(discardPile, testTitle);
         System.out.println("Test Ran");
     }
 }

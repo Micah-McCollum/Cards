@@ -15,6 +15,11 @@ public class Card {
 
     private String cardTitle;
 
+    // Constructor
+    // Initializes the card with a value and suit, sets visibility to false,
+    // and generates a card title based on the value and suit
+    // @param value Value of the card 
+    // @param suit Suit of the card
     public Card(Value value, Suit suit) {
         this.value = value;
         this.suit = suit;
@@ -35,6 +40,20 @@ public class Card {
         if(visible) {
             return suit;
     } return null;
+    }
+
+    public Card getCard() {
+        if(visible) {
+            return this;
+        }
+        return null;
+    }
+
+    public Card getCardInList(int index) {
+        if(visible) {
+            return this;
+        }
+        return null;
     }
 
     public String getCardTitle() {

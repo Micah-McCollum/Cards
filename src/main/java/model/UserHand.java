@@ -1,8 +1,8 @@
 package main.java.model;
 
-import main.java.model.Deck;
-import main.java.model.Card;
+import main.java.model.DiscardPile;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -12,23 +12,22 @@ import java.util.List;
  * Provides methods to add cards and retrieve the current hand.
  */
 public class UserHand {
-    private final List<Card> cardsList = new ArrayList<>();
-
-    private ArrayList<Card> cards;
+    List<Card> cardsList = new ArrayList<>();
     private int cardCount;
     private int handSize;
+    private int handValue;
 
+    // Constructor
+    // Initializes the user's hand with a specified number of cards from the active deck
     public UserHand(int handSize, Deck activeDeck) {
         this.handSize = handSize;
-        this.cards = new ArrayList<>(handSize);
-        this.cardCount = 0;
-
+        cardsList = new ArrayList<>();
+        
         // Initialize the hand with cards from the active deck
         for(int i = 0; i < handSize; i++) {
             if(activeDeck.getDeck().getCardCount() > 0) {
                 Card drawnCard = activeDeck.drawTop();
-                cards.add(drawnCard);
-                cardCount++;
+                cardsList.add(drawnCard);
             } else {
                 System.out.println("No more cards in the deck to draw");
                 break; 
@@ -36,20 +35,80 @@ public class UserHand {
         }
     }
 
+     public void drawFrom(Deck deck, int n) {
+        for(int i = 0; i < n; i++) {
+            Card c = deck.drawTop();
+            if(c == null) {
+                System.out.println("No more cards in the deck to draw");
+                break;
+            }
+            cardsList.add(c);
+        }
+    }
 
-    public Card[] getCards() {
+    // Function
+    // Returns the current hand of cards as List
+    // @return List<Card> current hand of cards
+    public List<Card> getCards() {
         while(cardsList.size() != 0) {
     }
-            return cards.toArray(new Card[0]);
-
-}
-
-    public List<Card> snapshot() { return List.copyOf(cardsList); }
-
-
-    public int getCardCount() {
-        return cardCount;
+    for(int i = 0; i < cardsList.size(); i++) {
+            cardsList.add(cardsList.get(i));
+    }
+        return cardsList;
     }
 
+    // Function
+    // Returns the number of cards in the user's hand
+    // @return int number of cards
+    public int getCardCount() {
+        return cardsList.size();
+    }
 
+    // Function
+    // Can select Card by hand index instead of TITLE
+    public void selectCardbyIndex(int index) {
+        if(index >= 0 && index < cardsList.size()) {
+            Card selectedCard = cardsList.get(index);
+            System.out.println("Selected Card: " + selectedCard.getCardTitle());
+        } else {
+            System.out.println("Invalid card index");
+        }
+    }   
+
+    // Function
+    // Discard by index
+    public void discardByIndex(DiscardPile pile, int index) {
+        if(index < 0 || index >= cardsList.size()) {
+            System.out.println("Invalid index for discard.");
+        }
+        Card c = cardsList.remove(index);
+        pile.accept(c);
+    }
+
+    // Discard by object
+    public boolean discard(DiscardPile pile, Card card) {
+        if (card != null && cardsList.remove(card)) {
+            // card.setVisible(true); // if you have this
+            pile.accept(card);
+            return true;
+        }
+        System.out.println("Card not found in user's hand.");
+        return false;
+    }
+
+    
+
+    public boolean discardByTitle(DiscardPile pile, String cardTitle) {
+        for(int i = 0; i < cardsList.size(); i++) {
+            Card card = cardsList.get(i);
+            if(card.getCardTitle().equals(cardTitle)) {
+                cardsList.remove(i);
+                pile.accept(card);
+                return true;
+            }
+        }
+        System.out.println("Card with title '" + cardTitle + "' not found in user's hand.");
+        return false;
+    }
 }
