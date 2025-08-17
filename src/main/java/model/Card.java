@@ -1,6 +1,10 @@
 package main.java.model;
 import java.util.*;
-
+/*  
+ *  Card.java
+ *  Represents a playing card with a suit, value, and visibility state.
+ *  Provides methods to get card details and manage visibility.
+ */
 public class Card {
     
     private Suit suit;
@@ -9,7 +13,7 @@ public class Card {
    
     private boolean visible = false;
 
-    String cardTitle;
+    private String cardTitle;
 
     public Card(Value value, Suit suit) {
         this.value = value;
