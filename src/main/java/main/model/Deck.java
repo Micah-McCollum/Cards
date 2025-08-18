@@ -1,4 +1,5 @@
-package main.java.model;
+package main.model;
+
 
 import java.util.*;
 /*
@@ -12,10 +13,14 @@ public final class Deck {
   private final List<Card> cards = new ArrayList<>(52);
   private int cardCount;
 
+  // Constructor
+  // Initializes the deck with all unique cards from a standard deck of playing cards
   public Deck() {
     for(Suit s : Suit.values())
       for(Value v : Value.values())
         cards.add(new Card(v, s));
+
+    cardCount = cards.size();
   }
 
   // Function
@@ -39,7 +44,7 @@ public final class Deck {
   public Deck getDeck() {
     return this;
   }
-  
+
   public int getCardCount() {
     return cards.size();  
 

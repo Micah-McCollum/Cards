@@ -1,5 +1,5 @@
-package main.java.model;
-import java.util.*;
+package main.model;
+
 /*  
  *  Card.java
  *  Represents a playing card with a suit, value, and visibility state.
@@ -15,11 +15,16 @@ public class Card {
 
     private String cardTitle;
 
+    // Constructor
+    // Initializes the card with a value and suit, sets visibility to false,
+    // and generates a card title based on the value and suit
+    // @param value Value of the card 
+    // @param suit Suit of the card
     public Card(Value value, Suit suit) {
         this.value = value;
         this.suit = suit;
         this.visible = false;
-        this.cardTitle = value.name() + " of " + suit.name();
+        this.cardTitle = value + " of " + suit;
         System.out.println("Card created: " + cardTitle);
        
     }
@@ -37,11 +42,27 @@ public class Card {
     } return null;
     }
 
-    public String getCardTitle() {
+    public Card getCard() {
         if(visible) {
-            return cardTitle;
-    }
+            return this;
+        }
         return null;
+    }
+
+    public Card getCardInList(int index) {
+        if(visible) {
+            return this;
+        }
+        return null;
+    }
+
+    public String getCardTitle() {    
+        return value + " of " + suit;
+    }
+
+    @Override 
+    public String toString() {          
+        return getCardTitle();
     }
 
     public boolean getVisible() {
