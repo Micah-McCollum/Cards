@@ -1,9 +1,6 @@
-package main.java.model;
+package main.model;
 
 import java.util.*;
-import main.java.model.Card;
-import main.java.model.Deck;    
-import main.java.model.UserHand;
 
 /*
  * DiscardPile.java
@@ -22,11 +19,11 @@ public class DiscardPile {
         this.discardedCards = new ArrayList<>();
         this.discardCount = 0;
     }
-
+    // Function
+    // Accepts a card to be added to the discard pile
+    // @param card Card to be discarded
     public void accept(Card card) {
         if(card == null) return;
-        // If your Card supports it:
-        // card.setVisible(true);
         discardedCards.add(card);
         discardCount++;
         System.out.println("Card discarded: " + card.getCardTitle());

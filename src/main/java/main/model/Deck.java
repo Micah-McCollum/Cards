@@ -1,4 +1,5 @@
-package main.java.model;
+package main.model;
+
 
 import java.util.*;
 /*

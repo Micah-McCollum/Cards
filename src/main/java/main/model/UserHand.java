@@ -1,10 +1,6 @@
-package main.java.model;
+package main.model;
 
-import main.java.model.DiscardPile;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 /*
  * UserHand.java
@@ -35,7 +31,11 @@ public class UserHand {
         }
     }
 
-     public void drawFrom(Deck deck, int n) {
+    // Function
+    // Draws cards from the deck and adds them to the user's hand
+    // @param deck Deck from which to draw cards
+    // @param n Number of cards to draw
+    public void drawFrom(Deck deck, int n) {
         for(int i = 0; i < n; i++) {
             Card c = deck.drawTop();
             if(c == null) {
@@ -50,12 +50,7 @@ public class UserHand {
     // Returns the current hand of cards as List
     // @return List<Card> current hand of cards
     public List<Card> getCards() {
-        while(cardsList.size() != 0) {
-    }
-    for(int i = 0; i < cardsList.size(); i++) {
-            cardsList.add(cardsList.get(i));
-    }
-        return cardsList;
+    return List.copyOf(cardsList);
     }
 
     // Function
@@ -81,6 +76,7 @@ public class UserHand {
     public void discardByIndex(DiscardPile pile, int index) {
         if(index < 0 || index >= cardsList.size()) {
             System.out.println("Invalid index for discard.");
+            return;
         }
         Card c = cardsList.remove(index);
         pile.accept(c);
@@ -88,8 +84,7 @@ public class UserHand {
 
     // Discard by object
     public boolean discard(DiscardPile pile, Card card) {
-        if (card != null && cardsList.remove(card)) {
-            // card.setVisible(true); // if you have this
+        if(card != null && cardsList.remove(card)) {
             pile.accept(card);
             return true;
         }
