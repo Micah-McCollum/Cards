@@ -16,10 +16,11 @@ public final class Deck {
   // Constructor
   // Initializes the deck with all unique cards from a standard deck of playing cards
   public Deck() {
+    Random rnd = new Random(1000);
     for(Suit s : Suit.values())
       for(Value v : Value.values())
         cards.add(new Card(v, s));
-
+    this.shuffle(new Random());
     cardCount = cards.size();
   }
 
