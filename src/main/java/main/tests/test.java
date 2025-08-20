@@ -14,13 +14,13 @@ public class test {
        
         Card card = new Card(Value.ACE, Suit.HEARTS);
         System.out.println("Card Visibility: " + card.getVisible());
-        System.out.println("Card Value: " + card.getValue());
+        System.out.println("Card Value: " + card.getValue(card));
         System.out.println("Card Suit: " + card.getSuit());
         System.out.println("Card Title: " + card.getCardTitle());
         card.setVisible(true);
         System.out.println("\nCard Visibility after setVisible: " + card.getVisible());
 
-        System.out.println("Card Value: " + card.getValue());
+        System.out.println("Card Value: " + card.getValue(card));
         System.out.println("Card Suit: " + card.getSuit());
         System.out.println("Card Title: " + card.getCardTitle() + "\n");
         
@@ -39,16 +39,21 @@ public class test {
         DiscardPile discardPile = new DiscardPile();
         System.out.println("\nNew Deck Size: " + newDeck.snapshot().size());
         // newDeck.shuffle(new Random());
-        UserHand userHand = new UserHand(3, newDeck);
-        System.out.println("New Deck Size after Player Draw (of 3): " + newDeck.snapshot().size());
+        UserHand userHand = new UserHand(2);
+        userHand.drawFrom(newDeck, 2);
+        userHand.drawFrom(newDeck, 1); // Intentional Draw Fail
+        System.out.println("New Deck Size after Player Draw (of 2): " + newDeck.snapshot().size());
 
         DealerHand dealerHand = new DealerHand(2);
         dealerHand.drawFrom(newDeck, 2);
         System.out.println("New Deck Size after Dealer Draw (of 2): " + newDeck.snapshot().size());
         System.out.println("User Hand Card Count: " + userHand.getCardCount());
         System.out.println("User Hand Cards: " + userHand.getCards());
+        System.out.println("User Hand Card Value " + userHand.getValue() + "\n");
+
         System.out.println("Dealer Hand Card Count: " + dealerHand.getCardCount());
         System.out.println("Dealer Hand Cards: " + dealerHand.getCards());
+        System.out.println("Dealer Hand Card Value " + dealerHand.getValue() + "\n");
         userHand.selectCardbyIndex(1);
         userHand.selectCardbyIndex(5); // Invalid index test
         

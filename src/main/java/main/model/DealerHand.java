@@ -47,6 +47,17 @@ public class DealerHand {
     }
 
     // Function
+    // Gets value of all cards in dealer's hand
+    // @return int hand value
+    public int getValue() {
+        int handValue = 0;
+        for(Card card : cards) {
+            handValue += card.getValue(card);
+        }
+        return handValue;
+    }
+
+    // Function
     // Discard by index
     public void discardByIndex(DiscardPile pile, int index) {
         if(index < 0 || index >= cards.size()) {

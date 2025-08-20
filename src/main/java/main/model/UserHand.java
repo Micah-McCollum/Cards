@@ -8,41 +8,33 @@ import java.util.List;
  * Provides methods to add cards and retrieve the current hand.
  */
 public class UserHand {
-    List<Card> cardsList = new ArrayList<>();
+    List<Card> cards; 
     private int cardCount;
     private int handSize;
     private int handValue;
 
     // Constructor
     // Initializes the user's hand with a specified number of cards from the active deck
-    public UserHand(int handSize, Deck activeDeck) {
+    public UserHand(int handSize) {
         this.handSize = handSize;
-        cardsList = new ArrayList<>();
-        
-        // Initialize the hand with cards from the active deck
-        for(int i = 0; i < handSize; i++) {
-            if(activeDeck.getDeck().getCardCount() > 0) {
-                Card drawnCard = activeDeck.drawTop();
-                cardsList.add(drawnCard);
-            } else {
-                System.out.println("No more cards in the deck to draw");
-                break; 
-            }
+        this.cards = new ArrayList<>(handSize);
+        this.cardCount = cards.size();
         }
-    }
 
     // Function
     // Draws cards from the deck and adds them to the user's hand
     // @param deck Deck from which to draw cards
     // @param n Number of cards to draw
     public void drawFrom(Deck deck, int n) {
+        if((cards.size() < handSize)) {
         for(int i = 0; i < n; i++) {
             Card c = deck.drawTop();
             if(c == null) {
                 System.out.println("No more cards in the deck to draw");
                 break;
             }
-            cardsList.add(c);
+            cards.add(c);
+        }
         }
     }
 
@@ -50,21 +42,32 @@ public class UserHand {
     // Returns the current hand of cards as List
     // @return List<Card> current hand of cards
     public List<Card> getCards() {
-    return List.copyOf(cardsList);
+    return List.copyOf(cards);
     }
 
     // Function
     // Returns the number of cards in the user's hand
     // @return int number of cards
     public int getCardCount() {
-        return cardsList.size();
+        return cards.size();
+    }
+
+    // Function
+    // Returns total value of cards in the hand
+    // @return int card summation value
+    public int getValue() {
+        int handValue = 0;
+        for(Card card : cards) {
+            handValue += card.getValue(card);
+        }
+        return handValue;
     }
 
     // Function
     // Can select Card by hand index instead of TITLE
     public void selectCardbyIndex(int index) {
-        if(index >= 0 && index < cardsList.size()) {
-            Card selectedCard = cardsList.get(index);
+        if(index >= 0 && index < cards.size()) {
+            Card selectedCard = cards.get(index);
             System.out.println("Selected Card: " + selectedCard.getCardTitle());
         } else {
             System.out.println("Invalid card index");
@@ -74,17 +77,17 @@ public class UserHand {
     // Function
     // Discard by index
     public void discardByIndex(DiscardPile pile, int index) {
-        if(index < 0 || index >= cardsList.size()) {
+        if(index < 0 || index >= cards.size()) {
             System.out.println("Invalid index for discard.");
             return;
         }
-        Card c = cardsList.remove(index);
+        Card c = cards.remove(index);
         pile.accept(c);
     }
 
     // Discard by object
     public boolean discard(DiscardPile pile, Card card) {
-        if(card != null && cardsList.remove(card)) {
+        if(card != null && cards.remove(card)) {
             pile.accept(card);
             return true;
         }
@@ -95,10 +98,10 @@ public class UserHand {
     
 
     public boolean discardByTitle(DiscardPile pile, String cardTitle) {
-        for(int i = 0; i < cardsList.size(); i++) {
-            Card card = cardsList.get(i);
+        for(int i = 0; i < cards.size(); i++) {
+            Card card = cards.get(i);
             if(card.getCardTitle().equals(cardTitle)) {
-                cardsList.remove(i);
+                cards.remove(i);
                 pile.accept(card);
                 return true;
             }
