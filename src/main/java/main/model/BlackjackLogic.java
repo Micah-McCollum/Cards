@@ -15,15 +15,36 @@ public class BlackjackLogic {
 
     public BlackjackLogic(){};
 
+    boolean playerStood = false;
+    boolean gameOver = false;
+
     public void startGame() {
         System.out.println("Starting Blackjack game...");
         Scanner scanner = new Scanner(System.in);
         Deck deck = new Deck();
         UserHand playerHand = new UserHand(2);
         DealerHand dealerHand = new DealerHand(2);
-        dealerHand.drawFrom(deck, 2);
-        System.out.println("Player's hand: " + playerHand.getCards());
-        System.out.println("Dealer's hand: " + dealerHand.getCards());
+        playerHand.drawFrom(deck, 1);
+        dealerHand.drawFrom(deck, 1);
+        playerHand.drawFrom(deck, 1);
+        dealerHand.drawFrom(deck, 1);
+
+
+        System.out.println("Player's hand: " + playerHand.getCards() + " Value: " + playerHand.getValue());
+        System.out.println("Dealer's hand: " + dealerHand.getCards() + " Value: " + dealerHand.getValue());
+        checkGameOver();
+        System.out.println("Player's turn. Type 'hit' to draw a card or 'stand' to stand");
+        System.out.println("Player Decision: ");
+        while(scanner.hasNextLine()) {
+            String decision = scanner.nextLine();
+            if(decision.equalsIgnoreCase("hit") || decision.equalsIgnoreCase("h")) {
+                playerHit();
+            } else if(decision.equalsIgnoreCase("stand") || decision.equalsIgnoreCase("s")) {
+                playerStand();
+                break;
+            }
+            checkGameOver();
+        }
         scanner.close();
     }
 
@@ -40,22 +61,31 @@ public class BlackjackLogic {
     }
 
     public void playerHit() {
+        Deck deck = new Deck();
+        UserHand p = new UserHand(p.getCardCount() + 1);
+        p.drawFrom(deck, 1);
         System.out.println("Player hits.");
+        p.drawFrom(deck, 1);
     }
 
     public void playerStand() {
-        // Logic for player standing (ending their turn)
+        playerStood = true;
         System.out.println("Player stands.");
     }
 
     public void dealerPlay() {
-        // Logic for dealer's turn
-        System.out.println("Dealer plays.");
-    }
-
-    public void determineWinner() {
-        // Logic to determine the winner of the game
-        System.out.println("Determining winner...");
+        DealerHand dealerHand = new DealerHand(2);
+        Deck deck = new Deck();
+        if(playerStood == false) {
+            return;
+        }
+        if(dealerHand.getValue() > 21) {
+            System.out.println("Dealer busts!");
+        } else if(dealerHand.getValue() < 17) {
+            dealerHand.drawFrom(deck, 1);
+            System.out.println("Dealer hits.");
+            System.out.println("Dealer's Value: " + dealerHand.getValue());
+        }
     }
 }
 
