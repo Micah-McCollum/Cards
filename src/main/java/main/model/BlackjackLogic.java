@@ -19,12 +19,24 @@ public class BlackjackLogic {
         System.out.println("Starting Blackjack game...");
         Scanner scanner = new Scanner(System.in);
         Deck deck = new Deck();
-        UserHand playerHand = new UserHand(2, deck);
+        UserHand playerHand = new UserHand(2);
         DealerHand dealerHand = new DealerHand(2);
         dealerHand.drawFrom(deck, 2);
         System.out.println("Player's hand: " + playerHand.getCards());
         System.out.println("Dealer's hand: " + dealerHand.getCards());
+        scanner.close();
+    }
 
+    private boolean checkGameOver() {
+        int handSize = 0;
+        UserHand p = new UserHand(handSize);
+        DealerHand d = new DealerHand(handSize);
+        if(p.getValue() == 21 && d.getValue() == 21) {
+            return true;
+        } if(d.getValue() == 21) {
+            return true;
+        }
+        return false;
     }
 
     public void playerHit() {

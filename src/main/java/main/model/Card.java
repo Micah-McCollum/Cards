@@ -23,23 +23,58 @@ public class Card {
     public Card(Value value, Suit suit) {
         this.value = value;
         this.suit = suit;
-        this.visible = false;
+        this.visible = true;
         this.cardTitle = value + " of " + suit;
         System.out.println("Card created: " + cardTitle);
        
     }
+    // TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING, ACE
+    // Function
+    // Returns the numeric value of the card if it is visible, otherwise returns 0
 
-    public Value getValue() {
-        if(visible) {
-            return value;
-        }
-        return null;
+    public int getValue(Card card) {
+
+        if(card.getVisible()) {
+            switch(card.getCardValue()) {
+                case TWO:
+                return 2;
+                case THREE:
+                return 3;
+                case FOUR:
+                return 4;
+                case FIVE:
+                return 5;
+                case SIX:
+                return 6;
+                case SEVEN:
+                return 7;
+                case EIGHT:
+                return 8;
+                case NINE:
+                return 9;
+                case TEN, JACK, QUEEN, KING:
+                return 10;
+                case ACE:
+                return 11;
+
+                default:
+                System.out.println("DEFAULT REACHED getValue");
+                return 0;
+            }
     }
-
+    System.out.println("getValue ERROR");
+        return 0;
+}
     public Suit getSuit() {
         if(visible) {
             return suit;
     } return null;
+    }
+
+    public Value getCardValue() {
+        if(visible) {
+            return value;
+        } return null;
     }
 
     public Card getCard() {
@@ -78,6 +113,10 @@ public class Card {
     }
 
     public void setCardValue(int value) {
+        System.out.println("disabled");
+    }   
+
+    public void setCardValue(Value value) {
         System.out.println("disabled");
     }   
 
