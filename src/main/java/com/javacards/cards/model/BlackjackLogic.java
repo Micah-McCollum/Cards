@@ -1,9 +1,8 @@
-package main.model;
+package com.javacards.cards.model;
 
 import java.util.*;
 import java.util.Scanner;
 
-import main.model.*;
 
 public class BlackjackLogic {
     
@@ -94,7 +93,7 @@ public class BlackjackLogic {
 
     public void playerStand() {
         System.out.println("Player stands.");
-        System.out.println("Player's Value: " + playerHand.getValue());
+        System.out.println("Player's Value: " );
     }
 
     public void dealerPlay() {

@@ -1,4 +1,4 @@
-package main.model;
+package com.javacards.cards.model;
 
 /*
  * Suit.java
