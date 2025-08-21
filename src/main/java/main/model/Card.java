@@ -24,9 +24,7 @@ public class Card {
         this.value = value;
         this.suit = suit;
         this.visible = true;
-        this.cardTitle = value + " of " + suit;
-        System.out.println("Card created: " + cardTitle);
-       
+        this.cardTitle = value + " of " + suit;       
     }
     // TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING, ACE
     // Function
