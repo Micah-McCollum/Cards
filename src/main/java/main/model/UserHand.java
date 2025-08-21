@@ -26,7 +26,6 @@ public class UserHand {
     // @param deck Deck from which to draw cards
     // @param n Number of cards to draw
     public void drawFrom(Deck deck, int n) {
-        if((cards.size() < handSize)) {
         for(int i = 0; i < n; i++) {
             Card c = deck.drawTop();
             if(c == null) {
@@ -34,7 +33,6 @@ public class UserHand {
                 break;
             }
             cards.add(c);
-        }
         }
     }
 
