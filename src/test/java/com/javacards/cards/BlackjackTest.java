@@ -1,7 +1,6 @@
-package main.tests;
+package com.javacards.cards;
 
-import main.model.BlackjackLogic;
-import main.model.*;
+import com.javacards.cards.model.BlackjackLogic;
 
 public class BlackjackTest {
         public static void main(String[] args) {

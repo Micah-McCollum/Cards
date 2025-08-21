@@ -1,13 +1,15 @@
-package main.tests;
+package com.javacards.cards;
 
-import main.model.Card;
-import main.model.Deck;
-import main.model.Suit;
-import main.model.Value;
-import main.model.UserHand;
-import main.model.DiscardPile;
 import java.util.Random;
-import main.model.DealerHand;
+
+import com.javacards.cards.model.Card;
+import com.javacards.cards.model.DealerHand;
+import com.javacards.cards.model.Deck;
+import com.javacards.cards.model.DiscardPile;
+import com.javacards.cards.model.Suit;
+import com.javacards.cards.model.UserHand;
+import com.javacards.cards.model.Value;
+
 
 public class test {
     public static void main(String[] args) {
@@ -41,7 +43,6 @@ public class test {
         // newDeck.shuffle(new Random());
         UserHand userHand = new UserHand(2);
         userHand.drawFrom(newDeck, 2);
-        userHand.drawFrom(newDeck, 1); // Intentional Draw Fail
         System.out.println("New Deck Size after Player Draw (of 2): " + newDeck.snapshot().size());
 
         DealerHand dealerHand = new DealerHand(2);

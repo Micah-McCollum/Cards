@@ -1,4 +1,4 @@
-package main.model;
+package com.javacards.cards.model;
 
 /*  
  *  Card.java
@@ -13,7 +13,6 @@ public class Card {
    
     private boolean visible = false;
 
-    private String cardTitle;
 
     // Constructor
     // Initializes the card with a value and suit, sets visibility to false,
@@ -24,7 +23,7 @@ public class Card {
         this.value = value;
         this.suit = suit;
         this.visible = true;
-        this.cardTitle = value + " of " + suit;       
+        String cardTitle = value + " of " + suit;       
     }
     // TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, TEN, JACK, QUEEN, KING, ACE
     // Function
