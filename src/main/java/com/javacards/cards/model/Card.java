@@ -7,9 +7,9 @@ package com.javacards.cards.model;
  */
 public class Card {
     
-    private Suit suit;
+    private final Suit suit;
     
-    private Value value;
+    private final Value value;
    
     private boolean visible = false;
 
@@ -33,30 +33,41 @@ public class Card {
 
         if(card.getVisible()) {
             switch(card.getCardValue()) {
-                case TWO:
-                return 2;
-                case THREE:
-                return 3;
-                case FOUR:
-                return 4;
-                case FIVE:
-                return 5;
-                case SIX:
-                return 6;
-                case SEVEN:
-                return 7;
-                case EIGHT:
-                return 8;
-                case NINE:
-                return 9;
-                case TEN, JACK, QUEEN, KING:
-                return 10;
-                case ACE:
-                return 11;
+                case TWO: {
+                    return 2;
+                }
+                case THREE: {
+                    return 3;
+                }
+                case FOUR: {
+                    return 4;
+                }
+                case FIVE: {
+                    return 5;
+                }
+                case SIX: {
+                    return 6;
+                }
+                case SEVEN: {
+                    return 7;
+                }
+                case EIGHT: {
+                    return 8;
+                }
+                case NINE: {
+                    return 9;
+                }
+                case TEN, JACK, QUEEN, KING: {
+                    return 10;
+                }
+                case ACE: {
+                    return 11;
+                }
 
-                default:
-                System.out.println("DEFAULT REACHED getValue");
-                return 0;
+                default: {
+                    System.out.println("DEFAULT REACHED getValue");
+                    return 0;
+                }
             }
     }
     System.out.println("getValue ERROR");

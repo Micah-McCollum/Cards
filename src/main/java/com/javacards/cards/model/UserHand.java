@@ -11,13 +11,13 @@ public class UserHand {
     List<Card> cards; 
     private int cardCount;
     private int handSize;
-    private int handValue;
+   
 
     // Constructor
     // Initializes the user's hand with a specified number of cards from the active deck
     public UserHand(int handSize) {
         this.handSize = handSize;
-        this.cards = new ArrayList<>(handSize);
+        this.cards = new ArrayList<>();
         this.cardCount = cards.size();
         }
 
@@ -26,14 +26,12 @@ public class UserHand {
     // @param deck Deck from which to draw cards
     // @param n Number of cards to draw
     public void drawFrom(Deck deck, int n) {
-        for(int i = 0; i < n; i++) {
             Card c = deck.drawTop();
             if(c == null) {
                 System.out.println("No more cards in the deck to draw");
-                break;
+                return;
             }
             cards.add(c);
-        }
     }
 
     // Function

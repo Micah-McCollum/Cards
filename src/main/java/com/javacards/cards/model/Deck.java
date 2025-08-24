@@ -1,7 +1,12 @@
 package com.javacards.cards.model;
 
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Random;
 /*
  * Deck.java
  * Represents a deck of playing cards
@@ -16,7 +21,6 @@ public final class Deck {
   // Constructor
   // Initializes the deck with all unique cards from a standard deck of playing cards
   public Deck() {
-    Random rnd = new Random(1000);
     for(Suit s : Suit.values())
       for(Value v : Value.values())
         cards.add(new Card(v, s));
