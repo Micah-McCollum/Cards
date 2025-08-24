@@ -19,7 +19,7 @@ public class test {
         System.out.println("Card Value: " + card.getValue(card));
         System.out.println("Card Suit: " + card.getSuit());
         System.out.println("Card Title: " + card.getCardTitle());
-        card.setVisible(true);
+        card.setVisible(false);
         System.out.println("\nCard Visibility after setVisible: " + card.getVisible());
 
         System.out.println("Card Value: " + card.getValue(card));
@@ -61,8 +61,13 @@ public class test {
         userHand.discardByIndex(discardPile, 1);
         dealerHand.discardByIndex(discardPile, 0);
         System.out.println("User Hand Cards after discard: " + userHand.getCards());
+        System.out.println("User Hand Card Value " + userHand.getValue() + "\n");
+
         System.out.println("Dealer Hand Cards after discard: " + dealerHand.getCards());
+        System.out.println("Dealer Hand Card Value " + dealerHand.getValue() + "\n");
+
         System.out.println("Discard Pile after discard:\n" + discardPile.getDiscardedCards());
+
         
         System.out.println("Test Ran");
     }
